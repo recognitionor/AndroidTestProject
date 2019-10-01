@@ -1,2 +1,0 @@
-# AndroidTestProject
-Android Test Project
