@@ -1,6 +1,5 @@
 package com.example.mvppatterntest.presenter
 
-import android.util.Log
 import com.example.mvppatterntest.adapter.contract.TestAdapterContract
 import com.example.mvppatterntest.contract.TestContract
 
