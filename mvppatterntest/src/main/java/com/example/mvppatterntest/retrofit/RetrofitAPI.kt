@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface RetrofitAPI {
-    @GET("/movie.json")
+    @GET("/test")
     fun test(): Call<String>
 
 }
