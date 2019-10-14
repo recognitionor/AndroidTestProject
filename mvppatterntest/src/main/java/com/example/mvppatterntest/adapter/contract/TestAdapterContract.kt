@@ -4,11 +4,17 @@ interface TestAdapterContract {
 
     interface View {
 
-        var onClick: (() -> Unit)?
+        fun notifyAdapter()
 
     }
 
     interface Model {
+
+        fun addItem(items: ArrayList<String>)
+
+        fun clearItems()
+
+        fun getItems(positions: Int) :String
 
     }
 }

@@ -1,2 +1,2 @@
-include ':app', ':fragmenttest', ':mvppatterntest'
+include ':app', ':fragmenttest', ':mvppatterntest', ':coordinatorlayouttest', ':recyclerviewtest'
 rootProject.name='AndroidTestProject'
