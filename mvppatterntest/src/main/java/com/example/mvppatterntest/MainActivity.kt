@@ -1,6 +1,7 @@
 package com.example.mvppatterntest
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setRetrofitInit()
         setSupportActionBar(toolbar)
 
         supportFragmentManager.beginTransaction().replace(
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             TestFragment()
         ).commit()
 
-        test = mRetrofitAPI?.test()
+        Log.d("jhlee", "$test")
 
 
         fab.setOnClickListener { view ->
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRetrofitInit() {
         mRetrofit = Retrofit.Builder()
-            .baseUrl("http://testapi.amondz.com")
+            .baseUrl("http://4ca5e5e2.ngrok.io")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         mRetrofitAPI = mRetrofit?.create(RetrofitAPI::class.java)
