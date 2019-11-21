@@ -7,25 +7,11 @@ import com.bumptech.glide.RequestManager
 import android.view.LayoutInflater
 
 
-
 class TestAdapter(private var glide: RequestManager) :
     RecyclerView.Adapter<TestViewHolder>() {
 
     companion object {
-        val URL_LIST: ArrayList<String> = arrayListOf(
-            "https://cdntest.amondz.com/product/1/resize/mainImg/PSI_1.jpeg",
-            "https://cdntest.amondz.com/product/1/resize/subImg/PSI_2.jpeg",
-            "https://cdntest.amondz.com/product/1/resize/subImg/PSI_3.jpeg",
-            "https://cdntest.amondz.com/product/1/resize/detailImg/PSI_4.jpeg",
-            "https://cdntest.amondz.com/product/1/resize/detailImg/PSI_5.jpeg",
-            "https://cdntest.amondz.com/product/2/resize/mainImg/PSI_6.jpeg",
-            "https://cdntest.amondz.com/product/2/resize/subImg/PSI_7.jpeg",
-            "https://cdntest.amondz.com/product/2/resize/subImg/PSI_8.jpeg",
-            "https://cdntest.amondz.com/product/2/resize/detailImg/PSI_9.jpeg",
-            "https://cdntest.amondz.com/product/2/resize/detailImg/PSI_10.jpeg",
-            "https://cdntest.amondz.com/product/3/resize/mainImg/PSI_11.jpeg",
-            "https://cdntest.amondz.com/product/3/resize/subImg/PSI_12.jpeg"
-        )
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {

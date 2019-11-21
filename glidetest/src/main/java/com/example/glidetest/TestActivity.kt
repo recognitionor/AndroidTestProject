@@ -26,31 +26,11 @@ class TestActivity : AppCompatActivity(), IGlideManager{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_main)
 
-        findViewById<Button>(R.id.clear_cache).setOnClickListener {
-            mGlide.clearMemory()
-            CoroutineScope(Dispatchers.IO).launch {
-                Log.d("jhlee", Thread.currentThread().name)
-                mGlide.clearDiskCache()
-            }
-        }
-
-        findViewById<Button>(R.id.activity).setOnClickListener {
-
-        }
-
         createGlide(this)
-        mRequestManager.applyDefaultRequestOptions(
-            RequestOptions().diskCacheStrategy(
-                DiskCacheStrategy.AUTOMATIC
-            )
-        )
 
-        val rv = findViewById<RecyclerView>(R.id.recyclerView)
-        mAdapter = TestAdapter(mRequestManager)
-//
+        mRequestManager.load("")
 
-        rv.adapter = mAdapter
-        rv.layoutManager = LinearLayoutManager(this)
+
     }
 
     override fun onDestroy() {
