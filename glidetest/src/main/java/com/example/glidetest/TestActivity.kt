@@ -15,16 +15,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), IGlideManager {
+class TestActivity : AppCompatActivity(), IGlideManager{
 
-    override lateinit var mGlide: Glide
     override lateinit var mRequestManager: RequestManager
+    override lateinit var mGlide: Glide
 
     private var mAdapter: TestAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.content_main)
 
         findViewById<Button>(R.id.clear_cache).setOnClickListener {
             mGlide.clearMemory()
@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity(), IGlideManager {
         }
 
         findViewById<Button>(R.id.activity).setOnClickListener {
-            Intent(this, TestActivity::class.java).run {
-                startActivity(this)
-            }
+
         }
 
         createGlide(this)
@@ -53,5 +51,11 @@ class MainActivity : AppCompatActivity(), IGlideManager {
 
         rv.adapter = mAdapter
         rv.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("jhlee", "onDestroy")
+        mRequestManager.pauseAllRequests()
     }
 }
