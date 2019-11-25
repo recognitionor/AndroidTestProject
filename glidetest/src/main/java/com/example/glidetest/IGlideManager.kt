@@ -16,10 +16,9 @@ interface IGlideManager {
     var mRequestManager: RequestManager
 
     fun createGlide(activity: Activity) {
-        mRequestManager = Glide.with(activity)
         mGlide = Glide.get(activity)
+        mRequestManager = Glide.with(activity)
         replaceRegister(activity)
-
     }
 
     fun replaceRegister(activity: Activity) {
@@ -30,12 +29,18 @@ interface IGlideManager {
                 val request = chain?.request()
                 Log.d("jhleetest", "${activity.componentName} :  url : ${request?.url()}")
                 Thread.sleep(1000)
-                Log.d("jhleetest", "2 : ${System.currentTimeMillis() - time} url : ${request?.url()}")
+                Log.d(
+                    "jhleetest",
+                    "2 : ${System.currentTimeMillis() - time} url : ${request?.url()}"
+                )
                 val response = chain?.proceed(request)
-                Log.d("jhleetest", "3 : ${System.currentTimeMillis() - time}url : ${request?.url()}")
+                Log.d(
+                    "jhleetest",
+                    "3 : ${System.currentTimeMillis() - time}url : ${request?.url()}"
+                )
                 response
             }
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 

@@ -7,7 +7,7 @@ import com.bumptech.glide.RequestManager
 import android.view.LayoutInflater
 
 
-class TestAdapter(private var glide: RequestManager) :
+class TestAdapter2(private var glide: RequestManager) :
     RecyclerView.Adapter<TestViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
@@ -21,6 +21,6 @@ class TestAdapter(private var glide: RequestManager) :
     override fun getItemCount(): Int = 5
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
-        holder.onBind(TestConstants.URL_LIST[position])
+        holder.onBind(TestConstants2.URL_LIST[position])
     }
 }

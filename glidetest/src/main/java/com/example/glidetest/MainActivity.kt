@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity(), IGlideManager {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        createGlide(this)
+
         findViewById<Button>(R.id.clear_cache).setOnClickListener {
             mGlide.clearMemory()
             CoroutineScope(Dispatchers.IO).launch {
@@ -40,7 +42,6 @@ class MainActivity : AppCompatActivity(), IGlideManager {
             }
         }
 
-        createGlide(this)
         mRequestManager.applyDefaultRequestOptions(
             RequestOptions().diskCacheStrategy(
                 DiskCacheStrategy.AUTOMATIC
