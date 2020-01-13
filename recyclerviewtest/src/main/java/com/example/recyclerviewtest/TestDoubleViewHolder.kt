@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TestViewHolder(ctx: Context, parent: ViewGroup) : RecyclerView.ViewHolder(
+class TestDoubleViewHolder(ctx: Context, parent: ViewGroup) : RecyclerView.ViewHolder(
     LayoutInflater.from(ctx).inflate(
-        R.layout.recycler_item,
+        R.layout.recycler_item_2,
         parent,
         false
     )

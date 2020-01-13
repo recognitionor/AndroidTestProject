@@ -3,9 +3,11 @@ package com.example.glidetest
 import android.app.Activity
 import android.util.Log
 import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.module.AppGlideModule
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import java.io.InputStream
@@ -16,8 +18,9 @@ interface IGlideManager {
     var mRequestManager: RequestManager
 
     fun createGlide(activity: Activity) {
-        mGlide = Glide.get(activity)
-        mRequestManager = Glide.with(activity)
+        Log.d("jhlee", "$activity")
+        mGlide = GlideApp.get(activity)
+        mRequestManager = GlideApp.with(activity)
         replaceRegister(activity)
     }
 
