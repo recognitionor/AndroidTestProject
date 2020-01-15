@@ -1,7 +1,7 @@
 package com.example.recyclerviewtest.spannablegrid
 
+import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,9 +43,28 @@ class SpanableTestFragment : Fragment() {
                 // Conditions for 2x2 items
                 return@GridSpanLookup SpannedGridLayoutManager.SpanInfo(tempSize, tempSize)
 
-            }, 6, 1f)
+            }, 6, 1f).also {
+                it.mItemMargin.bottom = 10
+                it.mItemMargin.left = 10
+                it.mItemMargin.right = 10
+                it.mItemMargin.top = 10
+
+            }
 
         mRecyclerView.adapter = mAdapter
+//        mRecyclerView.addItemDecoration(RecyclerDecoration(20, 10))
+
+    }
+
+    class RecyclerDecoration(private val divHBottom: Int, private val divSide: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            super.getItemOffsets(outRect, view, parent, state)
+            if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount - 1) outRect.bottom = divHBottom
+            if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount - 1) outRect.left = divSide
+            if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount - 1) outRect.right = divSide
+
+
+        }
 
     }
 }
