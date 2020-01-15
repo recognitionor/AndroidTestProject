@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewtest.R
-import com.example.recyclerviewtest.SpannedGridLayoutManagerTest
+import com.example.recyclerviewtest.SpannedGridLayoutManager
 
 
 class SpanableTestFragment : Fragment() {
@@ -31,18 +31,19 @@ class SpanableTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mAdapter = SpanableTestAdapter()
         mRecyclerView.layoutManager =
-            SpannedGridLayoutManagerTest(SpannedGridLayoutManagerTest.GridSpanLookup { position ->
-                Log.d("jhlee", "getSpanInfo : $position")
-                // Conditions for 2x2 items
-                // Conditions for 2x2 items
-                return@GridSpanLookup SpannedGridLayoutManagerTest.SpanInfo(1, 1)
-                return@GridSpanLookup if (position % 6 === 0 || position % 6 === 4) {
-                    SpannedGridLayoutManagerTest.SpanInfo(1, 1)
-                } else {
-                    SpannedGridLayoutManagerTest.SpanInfo(2, 2)
-                }
+            SpannedGridLayoutManager(SpannedGridLayoutManager.GridSpanLookup { position ->
+                val tempSize: Int = when (position % 16) {
+                    0, 1, 8, 9 -> 3
+                    2, 11 -> 4
+                    3, 4, 5, 6, 7, 10, 12, 13, 14, 15 -> 2
 
-            }, 3, 1f)
+                    else -> 2
+                }
+                // Conditions for 2x2 items
+                // Conditions for 2x2 items
+                return@GridSpanLookup SpannedGridLayoutManager.SpanInfo(tempSize, tempSize)
+
+            }, 6, 1f)
 
         mRecyclerView.adapter = mAdapter
 
