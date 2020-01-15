@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">recyclerViewTest</string>
     <string name="action_settings">Settings</string>
+    <string name="grid_view_btn_str">Grid</string>
+    <string name="spanable_view_btn_str">Spannable</string>
+    <string name="staggerd_view_btn_str">staggerd</string>
+
 </resources>

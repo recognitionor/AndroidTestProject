@@ -1,47 +1,39 @@
 package com.example.recyclerviewtest
 
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.example.recyclerviewtest.grid.GridTestFragment
+import com.example.recyclerviewtest.spannablegrid.SpanableTestFragment
+import com.example.recyclerviewtest.staggerd.StaggeredTestFragment
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mRecyclerView: RecyclerView
-
-    lateinit var mTestAdapter: TestRecyclerAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mRecyclerView = findViewById(R.id.recycler_view)
-        mTestAdapter = TestRecyclerAdapter(this)
-        val layoutManager = GridLayoutManager(this, 6)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                val result = when (position % 5) {
-                    0 -> 2
-                    1 -> 4
-                    2 -> 4
-                    3 -> 2
-                    3, 4 -> 3
-                    else -> 2
-                }
-                return 6
+        findViewById<Button>(R.id.grid_btn).setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_content_view, GridTestFragment())
+                commit()
             }
+
         }
-        mRecyclerView.layoutManager = layoutManager
-        mRecyclerView.adapter = mTestAdapter
+
+        findViewById<Button>(R.id.spanable_btn).setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_content_view, SpanableTestFragment()).commit()
+        }
+
+        findViewById<Button>(R.id.stagged_btn).setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_content_view, StaggeredTestFragment()).commit()
+        }
+
+
 
     }
 
