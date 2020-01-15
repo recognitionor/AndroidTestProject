@@ -20,7 +20,6 @@ import android.content.res.TypedArray;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,7 +141,7 @@ public class SpannedGridLayoutManager extends RecyclerView.LayoutManager {
             startTop = -(firstVisibleRow * cellHeight);
             forceClearOffsets = false;
         } else if (getChildCount() != 0) {
-            scrollOffset = getDecoratedTop(getChildAt(0));
+            scrollOffset = getDecoratedTop(Objects.requireNonNull(getChildAt(0)));
             startTop = scrollOffset - (firstVisibleRow * cellHeight);
             resetVisibleItemTracking();
         }
@@ -233,7 +232,11 @@ public class SpannedGridLayoutManager extends RecyclerView.LayoutManager {
                 recycleRow(lastVisibleRow, recycler, state);
             }
         } else { // scrolling content up
-            int bottom = getDecoratedBottom(Objects.requireNonNull(getChildAt(getChildCount() - 1)));
+            int bottom = 0;
+            for (int i = 1; i <= columns; i++) {
+                bottom = Math.max(bottom, getDecoratedBottom(Objects.requireNonNull(getChildAt(getChildCount() - i))));
+            }
+
             if (lastVisiblePosition == getItemCount() - 1) { // is at end of content
                 int scrollRange = Math.max(bottom - getHeight() + getPaddingBottom(), 0);
                 scrolled = Math.min(dy, scrollRange);
