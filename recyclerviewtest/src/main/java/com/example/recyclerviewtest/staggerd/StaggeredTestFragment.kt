@@ -27,7 +27,6 @@ class StaggeredTestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAdapter = StaggeredTestAdapter()
-        mRecyclerView.clipToPadding = true
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerView.adapter = mAdapter
 

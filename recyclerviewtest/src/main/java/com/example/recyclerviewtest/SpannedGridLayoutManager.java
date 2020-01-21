@@ -625,11 +625,21 @@ public class SpannedGridLayoutManager extends RecyclerView.LayoutManager {
 
     private void measureChildWithDecorationsAndMargin(View child, int widthSpec, int heightSpec) {
         calculateItemDecorationsForChild(child, itemDecorationInsets);
+
         RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) child.getLayoutParams();
+        Log.d("jhlee", "lp.leftMargin : " + lp.leftMargin);
+        Log.d("jhlee", "lp.rightMargin : " + lp.rightMargin);
+        Log.d("jhlee", "mItemMargin.left : " + mItemMargin.left);
+        Log.d("jhlee", "mItemMargin.right : " + mItemMargin.right);
+        Log.d("jhlee", "itemDecorationInsets.right : " + itemDecorationInsets.right);
+        Log.d("jhlee", "itemDecorationInsets.left : " + itemDecorationInsets.left);
+
+
         widthSpec = updateSpecWithExtra(widthSpec, lp.leftMargin + mItemMargin.left,
                 lp.rightMargin + mItemMargin.right);
         heightSpec = updateSpecWithExtra(heightSpec, lp.topMargin + mItemMargin.top,
                 lp.bottomMargin + mItemMargin.bottom);
+
         Log.d("jhlee", "bottom " + itemDecorationInsets.bottom);
         Log.d("jhlee", "left " + itemDecorationInsets.left);
         Log.d("jhlee", "right " + itemDecorationInsets.right);
