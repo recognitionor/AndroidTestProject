@@ -1,33 +1,161 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.coordinatorlayouttest.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:minHeight="100dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <!-- HEADER -->
-            <RelativeLayout app:layout_collapseMode="parallax" />
-
-            <android.support.v7.widget.Toolbar
+            <LinearLayout
+                android:background="@color/colorAccent"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
-        </android.support.design.widget.CollapsingToolbarLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
+                <TextView
+                    android:gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="TESTTEST" />
 
 
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-</android.support.design.widget.CoordinatorLayout>
+            </LinearLayout>
 
 
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <include layout="@layout/content_main" />-->
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
