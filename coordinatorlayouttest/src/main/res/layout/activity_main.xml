@@ -5,141 +5,166 @@
     android:layout_height="match_parent"
     tools:context="com.example.coordinatorlayouttest.MainActivity">
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="100dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+
             <LinearLayout
-                android:background="@color/colorAccent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
                 android:orientation="vertical">
 
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
+
                 <TextView
-                    android:gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:gravity="bottom"
                     android:text="TESTTEST" />
 
 
@@ -151,11 +176,10 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <include layout="@layout/content_main" />-->
+    <include
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
