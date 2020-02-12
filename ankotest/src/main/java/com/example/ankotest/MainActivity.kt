@@ -1,6 +1,5 @@
 package com.example.ankotest
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,105 +9,88 @@ import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var padding: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        padding = dip(48)
+
+        var width = DeviceUtils.getDeviceSize(this).x
+        width -= (this@MainActivity.padding * 2)
+        val temp = width / 3
+        var border = width % 2
+        Log.d("jhlee", "border 1 : $border")
+        val itemMargin = dip(2)
+        border = itemMargin % 6 + itemMargin
+
+        Log.d("jhlee", "border 2 : $border")
+
+
+        val result = temp - border
+        border = (width - (result * 3)) / 2
+
+        Log.d("jhlee", "test1 width: $width")
+        Log.d("jhlee", "temp: $temp")
+        Log.d("jhlee", "border result : $border")
+        Log.d("jhlee", "result : $result")
+
+
 
         verticalLayout {
 
             gravity = Gravity.CENTER
-            leftPadding = dip(16)
-            rightPadding = dip(16)
+            leftPadding = this@MainActivity.padding
+            rightPadding = this@MainActivity.padding
 
             linearLayout {
-                backgroundColor = Color.RED
-
+                backgroundColor = Color.YELLOW
                 frameLayout {
-                    backgroundColor = Color.YELLOW
-                }.lparams(test2(context), matchParent)
 
-                view {}.lparams(6, matchParent)
+                }.lparams((result * 2) + border, (result * 2) + border)
+
+                view {
+                    backgroundColor = Color.RED
+                }.lparams(border, matchParent)
 
                 verticalLayout {
+                    frameLayout {
+
+                    }.lparams(result, result)
+
+                    view {
+                        backgroundColor = Color.RED
+                    }.lparams(matchParent, border)
 
                     frameLayout {
-                        backgroundColor = Color.YELLOW
-                    }.lparams(test3(context), 0, 1f)
 
-
-                    view {}.lparams(matchParent, 6)
-
-                    frameLayout {
-                        backgroundColor = Color.YELLOW
-                    }.lparams(test3(context), 0, 1f)
-
-                }.lparams(test3(context), matchParent)
-            }.lparams(matchParent, test1(context))
+                    }.lparams(result, result)
+                }
+            }
 
             view {
                 backgroundColor = Color.RED
-            }.lparams(matchParent, 6)
+            }.lparams(matchParent, border)
 
             linearLayout {
-                backgroundColor = Color.RED
-
+                backgroundColor = Color.YELLOW
                 frameLayout {
-                    backgroundColor = Color.YELLOW
-                }.lparams(test3(context), test3(context))
 
-                view {}.lparams(6, matchParent)
-
+                }.lparams(result, result)
+                view {
+                    backgroundColor = Color.RED
+                }.lparams(border, matchParent)
                 frameLayout {
-                    backgroundColor = Color.YELLOW
 
-                }.lparams(test3(context), test3(context))
-
-                view {}.lparams(6, matchParent)
-
+                }.lparams(result, result)
+                view {
+                    backgroundColor = Color.RED
+                }.lparams(border, matchParent)
                 frameLayout {
-                    backgroundColor = Color.YELLOW
 
-                }.lparams(test3(context), test3(context))
+                }.lparams(result, result)
 
-            }.lparams(matchParent, test3(context))
-
-        }
-    }
-
-
-    private fun test1(context: Context): Int {
-
-        var width = DeviceUtils.getDeviceSize(this).x
-        Log.d("jhlee", "test1 width: $width")
-        width -= dip(16) * 2
-
-        Log.d("jhlee", "test1 sideMargin: $width")
-
-        return ((width / 3) * 2).apply {
-            Log.d("jhlee", "test1 : $this")
-        }
-    }
-
-    private fun test2(context: Context): Int {
-
-        return (test3(context) * 2 + 6).apply {
-            Log.d("jhlee", "test2 : $this")
-        }
-    }
-
-    private fun test3(context: Context): Int {
-
-        var width = DeviceUtils.getDeviceSize(this).x
-        width -= dip(16) * 2
-        width -= 12
-        Log.d("jhlee", "test3 width: $width")
-
-        Log.d("jhlee", "test3 dip: ${dip(2)}")
-
-
-        Log.d("jhlee", "test3 sideMargin: $width")
-
-        return (width / 3).apply {
-            Log.d("jhlee", "test3 : $this")
+            }
         }
     }
 }
