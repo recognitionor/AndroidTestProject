@@ -1,9 +1,11 @@
 package com.example.imageviewtest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
