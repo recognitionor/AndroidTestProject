@@ -14,27 +14,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        padding = dip(48)
+        padding = dip(16)
 
         var width = DeviceUtils.getDeviceSize(this).x
         width -= (this@MainActivity.padding * 2)
-        val temp = width / 3
-        var border = width % 2
-        Log.d("jhlee", "border 1 : $border")
-        val itemMargin = dip(2)
-        border = itemMargin % 6 + itemMargin
+        val tempImageSize = width / 3
+        val border: Int
+        var itemMarginOffset = dip(2)
+        itemMarginOffset = when (itemMarginOffset % 3) {
+            0 -> itemMarginOffset
+            1 -> 2 + itemMarginOffset
+            2 -> 1 + itemMarginOffset
+            else -> itemMarginOffset
+        }
+        itemMarginOffset /= 2
+        val result = tempImageSize - itemMarginOffset
 
-        Log.d("jhlee", "border 2 : $border")
-
-
-        val result = temp - border
         border = (width - (result * 3)) / 2
-
-        Log.d("jhlee", "test1 width: $width")
-        Log.d("jhlee", "temp: $temp")
-        Log.d("jhlee", "border result : $border")
-        Log.d("jhlee", "result : $result")
-
 
 
         verticalLayout {
