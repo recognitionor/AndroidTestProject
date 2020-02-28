@@ -1,5 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="test">10dp</dimen>
+    <dimen name="tag_main_layout_side_padding">9dp</dimen>
+    <dimen name="tag_main_image_margin">9dp</dimen>
+    <dimen name="tag_main_medium_image_margin">1dp</dimen>
 
 </resources>

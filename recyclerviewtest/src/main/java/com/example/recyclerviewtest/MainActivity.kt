@@ -5,8 +5,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.example.recyclerviewtest.grid.GridTestFragment
 import com.example.recyclerviewtest.spannablegrid.SpanableTestFragment
 import com.example.recyclerviewtest.staggerd.StaggeredTestFragment
@@ -16,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         findViewById<Button>(R.id.grid_btn).setOnClickListener {
             supportFragmentManager.beginTransaction().apply {

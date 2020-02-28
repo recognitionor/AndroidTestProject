@@ -10,13 +10,13 @@ import com.example.recyclerviewtest.R
 class StaggeredViewHolder(ctx: Context, parent: ViewGroup, targetView: View) :
     RecyclerView.ViewHolder(targetView) {
 
-    private val textView: TextView by lazy {
-        itemView.findViewById(R.id.text_view) as TextView
-    }
-
-    fun setText(str: String) {
-        textView.text = str
-    }
+//    private val textView: TextView by lazy {
+//        itemView.findViewById(R.id.text_view) as TextView
+//    }
+//
+//    fun setText(str: String) {
+//        textView.text = str
+//    }
 
 
 }
