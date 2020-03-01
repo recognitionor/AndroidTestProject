@@ -1,6 +1,6 @@
 package com.example.fragmentlifecycletest
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -132,7 +132,7 @@ class TestFragment : Fragment() {
         Log.d("jhlee", "onDestroy2 isStateSaved : ${this.isStateSaved}")
     }
 
-    override fun onAttach(activity: Activity?) {
+    override fun onAttach(activity: AppCompatActivity?) {
         Log.d("jhlee", "onAttach1 isAdded : ${this.isAdded}")
         Log.d("jhlee", "onAttach1 isResumed : ${this.isResumed}")
         Log.d("jhlee", "onAttach1 isInLayout : ${this.isInLayout}")

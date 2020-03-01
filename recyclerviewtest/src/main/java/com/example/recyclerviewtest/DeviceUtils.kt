@@ -1,6 +1,6 @@
 package com.example.recyclerviewtest
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.graphics.Point
 import android.os.Build
@@ -16,7 +16,7 @@ object DeviceUtils {
     /**
      *  size.x = width, size.y = hegiht
      */
-    fun getDeviceSize(context: Activity): Point {
+    fun getDeviceSize(context: AppCompatActivity): Point {
         val displayMetrics = DisplayMetrics()
         context.windowManager.defaultDisplay.getMetrics(displayMetrics)
         context.windowManager.defaultDisplay.let { display ->

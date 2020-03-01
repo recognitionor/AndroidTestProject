@@ -1,6 +1,6 @@
 package com.example.recyclerviewtest.staggerd
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import com.example.recyclerviewtest.R
 import com.example.recyclerviewtest.SpannedGridLayoutManager
 
 
-class StaggeredTestAdapter(var context: Activity) :
+class StaggeredTestAdapter(var context: AppCompatActivity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var mSmallImageSize: Int = 0

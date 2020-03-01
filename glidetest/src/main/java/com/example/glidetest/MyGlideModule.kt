@@ -1,6 +1,6 @@
 package com.example.glidetest
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.util.Log
 import com.bumptech.glide.Glide
@@ -12,7 +12,7 @@ import com.bumptech.glide.module.AppGlideModule
 @GlideModule
 class MyGlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        (context as Activity).let {
+        (context as AppCompatActivity).let {
             Log.d("jhlee", "$it")
         }
         super.applyOptions(context, builder)
@@ -21,7 +21,7 @@ class MyGlideModule : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         super.registerComponents(context, glide, registry)
-        (context as Activity).let {
+        (context as AppCompatActivity).let {
             Log.d("jhlee", "$it")
         }
         Log.d("jhlee", "registerComponents $context")
