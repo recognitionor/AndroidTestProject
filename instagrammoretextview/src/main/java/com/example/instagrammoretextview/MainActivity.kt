@@ -25,13 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         textView = findViewById(R.id.textView)
         editText = findViewById(R.id.editText)
-
-        val str = "더보기"
-        textView.setTrimCollapsedText(str)
-
-        textView.setTrimLines(2)
-
-        textView.setTrimExpandedText("")
+        textView.text = "test"
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
@@ -45,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
         button.setOnClickListener {
-            textView.toggleTextView()
         }
     }
 
