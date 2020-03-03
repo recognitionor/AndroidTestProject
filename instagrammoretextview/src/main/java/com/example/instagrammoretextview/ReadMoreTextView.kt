@@ -25,7 +25,7 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
 
     private var mTrimLine: Int = 2
 
-    constructor(context: Context?) : super(context)
+    constructor(context: Context?) : this(context, null)
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         viewTreeObserver.addOnGlobalLayoutListener(this)
