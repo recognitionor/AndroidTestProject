@@ -6,7 +6,20 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import org.jetbrains.anko.*
 
-class MyRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
+    , ReadMoreTextView.IReadMoreTextViewStatusListener {
+
+    override var expandedViewPositionSet: HashSet<Int> = HashSet()
+
+    override fun addExpandedView(position: Int) {
+        expandedViewPositionSet.add(position)
+    }
+
+    override fun isExpandedView(position: Int): Boolean {
+        return expandedViewPositionSet.contains(position).apply {
+            Log.d("jhlProductDetailActivityee", "isExpandedView : $this")
+        }
+    }
 
     inner class MyViewHolderUI : AnkoComponent<ViewGroup> {
         lateinit var readMoreTextView: ReadMoreTextView
@@ -26,7 +39,8 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class MyViewHolder(
         private var ui: MyViewHolderUI,
-        view: LinearLayout
+        view: LinearLayout,
+        var listener: ReadMoreTextView.IReadMoreTextViewStatusListener
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(position: Int) {
@@ -37,19 +51,24 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (position == 0) {
                 temp = ""
             }
-//            Log.d("jhlee", "onBind $position")
-            ui.readMoreTextView.position = position
-            ui.readMoreTextView.post {
-                ui.readMoreTextView.setReadMoreText(temp)
+            with(ui.readMoreTextView) {
+                this.onExpandedClickCallbacks = {
+                    listener.addExpandedView(position)
+                }
+                this.isExpandedStatus = listener.isExpandedView(position)
+                this.position = position
+                this.post {
+                    Log.d("jhlee", "setReadMoreText $isExpandedStatus , $position")
+                    this.setReadMoreText(temp)
+                }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val ui = MyViewHolderUI()
         val view = ui.createView(AnkoContext.create(parent.context, parent))
-        return MyViewHolder(ui, view)
+        return MyViewHolder(ui, view, this)
     }
 
     override fun getItemCount(): Int {

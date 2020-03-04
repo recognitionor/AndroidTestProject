@@ -13,9 +13,20 @@ import androidx.appcompat.widget.AppCompatTextView
 
 class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListener {
 
+    interface IReadMoreTextViewStatusListener {
+        var expandedViewPositionSet: HashSet<Int>
+
+        fun addExpandedView(position: Int)
+
+        fun isExpandedView(position: Int): Boolean
+
+    }
+
     private var mOriginText: CharSequence? = null
 
-    private var isExpandedStatus: Boolean = false
+    var onExpandedClickCallbacks: (() -> Unit?)? = null
+
+    var isExpandedStatus: Boolean = false
 
     private var mExpandedText: String = " ...more"
 
@@ -46,8 +57,10 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
             val expandedSpan = SpannableStringBuilder(mExpandedText)
             expandedSpan.setSpan(object : ClickableSpan() {
                 override fun onClick(widget: View) {
+                    Log.d("jhlee", "onClick")
                     isExpandedStatus = true
                     text = mOriginText
+                    onExpandedClickCallbacks?.invoke()
                 }
             }, 0, mExpandedText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
             resultSpan.append(expandedSpan)
@@ -58,6 +71,8 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
     fun setReadMoreText(text: CharSequence?) {
         super.setText(text)
         mOriginText = text
-        viewTreeObserver.addOnGlobalLayoutListener(this)
+        if (!isExpandedStatus) {
+            viewTreeObserver.addOnGlobalLayoutListener(this)
+        }
     }
 }
