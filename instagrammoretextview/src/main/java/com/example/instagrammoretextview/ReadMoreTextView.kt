@@ -3,8 +3,6 @@ package com.example.instagrammoretextview
 import android.content.Context
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
@@ -19,54 +17,47 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
 
     private var isExpandedStatus: Boolean = false
 
-    private var isFirstInitText: Boolean = true
-
     private var mExpandedText: String = " ...more"
 
     private var mTrimLine: Int = 2
 
+    var position: Int = 0
+
     constructor(context: Context?) : this(context, null)
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        viewTreeObserver.addOnGlobalLayoutListener(this)
+    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         movementMethod = LinkMovementMethod.getInstance()
     }
 
-    override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(text, type)
-        if (isFirstInitText && !text.isNullOrEmpty()) {
-            mOriginText = text
-            isFirstInitText = false
-        }
-    }
-
     override fun onGlobalLayout() {
-        val obs: ViewTreeObserver = viewTreeObserver
-        obs.removeOnGlobalLayoutListener(this)
-        if (layout != null && !mOriginText.isNullOrEmpty()) {
-            if (!isExpandedStatus && layout.lineCount > mTrimLine) {
-                val endIndex = layout.getLineEnd(mTrimLine - 1) - mExpandedText.length
-                val span = SpannableStringBuilder(mOriginText, 0, endIndex)
-                updateCollapseText(span)
-                text = span
+        viewTreeObserver.removeOnGlobalLayoutListener(this)
+        if (layout != null && layout.lineCount > mTrimLine) {
+            var endIndex = layout.getLineEnd(mTrimLine - 1) - mExpandedText.length
+            if (endIndex < 0) {
+                endIndex = 0
             }
+            val resultSpan = SpannableStringBuilder(text, 0, endIndex)
+            val expandedSpan = SpannableStringBuilder(mExpandedText)
+            expandedSpan.setSpan(object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    isExpandedStatus = true
+                    text = mOriginText
+                }
+            }, 0, mExpandedText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            resultSpan.append(expandedSpan)
+            text = resultSpan
         }
     }
 
-    private fun updateCollapseText(spanBuilder: SpannableStringBuilder) {
-        val appendSpan = SpannableStringBuilder(mExpandedText)
-        appendSpan.setSpan(object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                updateExpandedText()
-            }
-        }, 0, mExpandedText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-        spanBuilder.append(appendSpan)
-    }
-
-    private fun updateExpandedText() {
-        isExpandedStatus = true
-        mOriginText?.length?.let {
-            text = SpannableStringBuilder(mOriginText, 0, it)
-        }
+    fun setReadMoreText(text: CharSequence?) {
+        super.setText(text)
+        mOriginText = text
+        viewTreeObserver.addOnGlobalLayoutListener(this)
     }
 }

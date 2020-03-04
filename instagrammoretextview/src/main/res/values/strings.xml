@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">InstagramMoreTextView</string>
     <string name="action_settings">Settings</string>
+    <string name="test_text_1">언론들도 혹독한 비판 기사를 쏟아내고 있다.</string>
+    <string name="test_text_2">고 의원은 "굳이 서울에서 1석을 줄인다면 지난 2016년 총선에서 분구된 강남 선거구를 통합하는 것이 합리적인데 이런 기본적인 상식조차 지키지 못했다"고 했다. 노원을이 지역구인 우원식 의원은 입장문을 통해 "획정위가 강남구 선거구를 줄이지 않고 노원구 선거구를 줄이는 결정을 한 것은 정치적 유불리를 따라 불공정하고 불합리한 판단을 내린 것"이라고 했다.미래통합당 후보로 노원병에 출마 예정인 이준석 최고위원도 페이스북 글에서 "노원 갑·을·병이 갑·을로 개편되면 '을' 지역이 둘러 갈라져 기존 '갑'과 '병'으로 붙는 것"이라며 "선거운동을 해야 하는 대상이 1.5배로 늘어나 비상"이라고 했다.</string>
 </resources>
