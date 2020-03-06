@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.widget.AppCompatTextView
+import java.lang.Exception
 
 class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListener {
 
@@ -28,7 +29,7 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
 
     var isExpandedStatus: Boolean = false
 
-    private var mExpandedText: String = " ...more"
+    private var mExpandedText: String = "... 더 보기"
 
     private var mTrimLine: Int = 2
 
@@ -49,22 +50,44 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
     override fun onGlobalLayout() {
         viewTreeObserver.removeOnGlobalLayoutListener(this)
         if (layout != null && layout.lineCount > mTrimLine) {
-            var endIndex = layout.getLineEnd(mTrimLine - 1) - mExpandedText.length
+            var endIndex = layout.getLineEnd(mTrimLine - 1)
             if (endIndex < 0) {
                 endIndex = 0
             }
-            val resultSpan = SpannableStringBuilder(text, 0, endIndex)
+
+            var resultSpan = SpannableStringBuilder(text, 0, endIndex)
+            val lastChar = resultSpan.substring(endIndex - 1, endIndex)
+            if (lastChar == "\n") {
+                resultSpan = SpannableStringBuilder(text, 0, endIndex - 1)
+            }
             val expandedSpan = SpannableStringBuilder(mExpandedText)
             expandedSpan.setSpan(object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    Log.d("jhlee", "onClick")
                     isExpandedStatus = true
                     text = mOriginText
                     onExpandedClickCallbacks?.invoke()
                 }
             }, 0, mExpandedText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
             resultSpan.append(expandedSpan)
-            text = resultSpan
+            checkLine(resultSpan, expandedSpan)
+
+        }
+    }
+
+    private fun checkLine(
+        resultSpan: SpannableStringBuilder,
+        expandedSpan: SpannableStringBuilder
+    ) {
+        text = resultSpan
+
+        if (layout.lineCount > mTrimLine) {
+            val endIndex = resultSpan.length - (mExpandedText.length + 1)
+            if (endIndex > resultSpan.length || endIndex < 0) {
+                return
+            }
+            val temp = resultSpan.subSequence(0, endIndex)
+            val tempBuilder = SpannableStringBuilder(temp).append(expandedSpan)
+            checkLine(tempBuilder, expandedSpan)
         }
     }
 
