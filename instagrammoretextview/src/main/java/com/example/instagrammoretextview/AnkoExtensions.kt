@@ -8,3 +8,7 @@ inline fun ViewManager.readMoreTextView(init: ReadMoreTextView.() -> Unit): Read
     return ankoView({ ReadMoreTextView(it) }, theme = 0, init = init)
 }
 
+inline fun ViewManager.tagTextView(init: TagTextView.() -> Unit): TagTextView {
+    return ankoView({ TagTextView(it) }, theme = 0, init = init)
+}
+

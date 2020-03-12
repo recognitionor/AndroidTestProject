@@ -1,18 +1,19 @@
 package com.example.instagrammoretextview
 
 import android.content.Context
+import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.widget.AppCompatTextView
-import java.lang.Exception
 
-class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListener {
+open class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListener {
 
     interface IReadMoreTextViewStatusListener {
         var expandedViewPositionSet: HashSet<Int>
@@ -23,15 +24,19 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
 
     }
 
+    private var mExpandedDotText: String = context.getString(R.string.read_more_dot_text)
+
+    private var mTrimLine: Int = 2
+
     private var mOriginText: CharSequence? = null
+
+    private var mExpandedText: String = context.getString(R.string.read_more_text)
 
     var onExpandedClickCallbacks: (() -> Unit?)? = null
 
     var isExpandedStatus: Boolean = false
 
-    private var mExpandedText: String = "... 더 보기"
-
-    private var mTrimLine: Int = 2
+    var mExpandedWholeText: String = mExpandedDotText + mExpandedText
 
     var position: Int = 0
 
@@ -50,44 +55,32 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
     override fun onGlobalLayout() {
         viewTreeObserver.removeOnGlobalLayoutListener(this)
         if (layout != null && layout.lineCount > mTrimLine) {
-            var endIndex = layout.getLineEnd(mTrimLine - 1)
+            var endIndex = layout.getLineEnd(mTrimLine - 1) - mExpandedWholeText.length
             if (endIndex < 0) {
                 endIndex = 0
             }
-
-            var resultSpan = SpannableStringBuilder(text, 0, endIndex)
-            val lastChar = resultSpan.substring(endIndex - 1, endIndex)
-            if (lastChar == "\n") {
-                resultSpan = SpannableStringBuilder(text, 0, endIndex - 1)
-            }
-            val expandedSpan = SpannableStringBuilder(mExpandedText)
-            expandedSpan.setSpan(object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    isExpandedStatus = true
-                    text = mOriginText
-                    onExpandedClickCallbacks?.invoke()
-                }
-            }, 0, mExpandedText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            val resultSpan = SpannableStringBuilder(text, 0, endIndex)
+            val expandedSpan = createExpandedSpannable(resultSpan)
             resultSpan.append(expandedSpan)
-            checkLine(resultSpan, expandedSpan)
-
+            correctionLine(resultSpan, expandedSpan)
         }
     }
 
-    private fun checkLine(
+    protected open fun correctionLine(
         resultSpan: SpannableStringBuilder,
         expandedSpan: SpannableStringBuilder
     ) {
+
         text = resultSpan
 
-        if (layout.lineCount > mTrimLine) {
+        if (layout != null && layout.lineCount > mTrimLine) {
             val endIndex = resultSpan.length - (mExpandedText.length + 1)
             if (endIndex > resultSpan.length || endIndex < 0) {
                 return
             }
             val temp = resultSpan.subSequence(0, endIndex)
             val tempBuilder = SpannableStringBuilder(temp).append(expandedSpan)
-            checkLine(tempBuilder, expandedSpan)
+            correctionLine(tempBuilder, expandedSpan)
         }
     }
 
@@ -97,5 +90,33 @@ class ReadMoreTextView : AppCompatTextView, ViewTreeObserver.OnGlobalLayoutListe
         if (!isExpandedStatus) {
             viewTreeObserver.addOnGlobalLayoutListener(this)
         }
+    }
+
+    private fun createExpandedSpannable(resultSpan: SpannableStringBuilder): SpannableStringBuilder {
+        val expandedSpan = SpannableStringBuilder(mExpandedWholeText)
+        expandedSpan.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    setOriginText()
+                }
+            },
+            mExpandedDotText.length,
+            mExpandedWholeText.length,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+        val colorSpan = ForegroundColorSpan(Color.CYAN)
+        expandedSpan.setSpan(
+            colorSpan,
+            0,
+            mExpandedWholeText.length,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+        return expandedSpan
+    }
+
+    fun setOriginText() {
+        isExpandedStatus = true
+        text = mOriginText
+        onExpandedClickCallbacks?.invoke()
     }
 }

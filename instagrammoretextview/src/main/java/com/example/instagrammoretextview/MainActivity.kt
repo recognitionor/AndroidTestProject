@@ -1,50 +1,38 @@
 package com.example.instagrammoretextview
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.instagrammoretextview.fragment.ReadMoreTestFragment
+import com.example.instagrammoretextview.fragment.WholeTagTestFragment
 
 class MainActivity : AppCompatActivity() {
 
 //    lateinit var editText: EditText
-    lateinit var textView: ReadMoreTextView
-    lateinit var button: Button
-    private lateinit var recyclerView: RecyclerView
+    lateinit var mReadMoreBtn: Button
+
+    lateinit var mWholeTagBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
-        button = findViewById(R.id.button)
+        mReadMoreBtn = findViewById(R.id.read_more_btn)
+        mWholeTagBtn = findViewById(R.id.whole_tag_btn)
 
-//        editText = findViewById(R.id.editText)
-        recyclerView = findViewById(R.id.recyclerview)
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = MyRecyclerViewAdapter()
-        button.setOnClickListener {
+
+
+        val readMoreFragment =
+            ReadMoreTestFragment()
+
+        val wholeTagFragment =
+            WholeTagTestFragment()
+        mReadMoreBtn.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.frame_content, readMoreFragment).commit()
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        mWholeTagBtn.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.frame_content, wholeTagFragment).commit()
         }
     }
 }
