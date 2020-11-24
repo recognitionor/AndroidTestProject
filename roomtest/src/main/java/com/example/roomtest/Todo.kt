@@ -3,8 +3,6 @@ package com.example.roomtest
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
-
 @Entity
 class Todo {
     @PrimaryKey(autoGenerate = true) //autoGenerate는 알아서 id를 1씩 증가시켜준다. autoincrement와 똑같

@@ -3,15 +3,31 @@
 buildscript {
     ext.kotlin_version = '1.3.21'
 
+    if (!project.hasProperty("versions")) {
+        ext.versions = [
+                "compileSdk"            : 28,
+                "targetSdk"             : 29,
+                "minSdk"                : 16,
+                "appcompat"             : "1.1.0",
+                "legacySupportV13"      : "1.0.0",
+                "recyclerView"          : "1.1.0",
+                "playServicesIdentifier": "16.0.0",
+                "multiDex"              : "2.0.1",
+                "constraintLayout"      : "1.1.3",
+        ]
+    }
+
     repositories {
         google()
         jcenter()
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
+        maven { url = uri("https://applovin.bintray.com/Quality-Service") }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath ("com.applovin.quality:AppLovinQualityServiceGradlePlugin:3.+")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
