@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.example.tapjoy"
+        android:versionCode="1"
+        android:versionName="1.0">
+
+    <uses-sdk
+            android:minSdkVersion="14"
+            android:targetSdkVersion="27" />
+
+    <!-- Tapjoy Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+            android:icon="@drawable/icon"
+            android:label="@string/app_name">
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+
+        <activity
+                android:name="com.example.tapjoy.MainActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:label="@string/app_name"
+                android:launchMode="singleTask"
+                android:theme="@style/tapjoyEasyAppTheme"
+                android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--        <activity-->
+<!--                android:name=".EventActivity"-->
+<!--                android:configChanges="orientation|keyboardHidden|screenSize"-->
+<!--                android:launchMode="singleTask"-->
+<!--                android:theme="@style/tapjoyEasyAppTheme"-->
+<!--                android:windowSoftInputMode="stateHidden" />-->
+<!--        <activity-->
+<!--                android:name=".UserActivity"-->
+<!--                android:configChanges="orientation|keyboardHidden|screenSize"-->
+<!--                android:launchMode="singleTask"-->
+<!--                android:theme="@style/tapjoyEasyAppTheme"-->
+<!--                android:windowSoftInputMode="stateHidden" />-->
+
+        <!-- Tapjoy -->
+        <activity
+                android:name="com.tapjoy.TJAdUnitActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+                android:name="com.tapjoy.TJContentActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--To enable FCM push notifications, add the following two services-->
+        <!--If you have created your own services, replace "<service android:name=".pushnotification.FCMTokenService"> with
+        "your FCM service given name"-->
+        <!--<service android:name=".pushnotification.FCMTokenService">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+        <!--<service android:name=".pushnotification.FCMMessageService">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+
+        <receiver android:name="com.tapjoy.TapjoyReceiver" />
+
+        <meta-data
+                android:name="com.tapjoy.notification.icon.large"
+                android:resource="@drawable/ic_large" />
+        <meta-data
+                android:name="com.tapjoy.notification.icon"
+                android:resource="@drawable/ic_notify" />
+        <meta-data
+                android:name="com.tapjoy.notification.icon.compat"
+                android:resource="@drawable/icon" />
+    </application>
+
+</manifest>

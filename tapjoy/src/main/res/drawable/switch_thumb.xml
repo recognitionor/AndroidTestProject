@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <shape
+            android:shape="rectangle"
+            android:visible="true"
+            android:useLevel="false">
+            <gradient
+                android:startColor="@color/buttonColor"
+                android:endColor="@color/buttonColor"
+                android:angle="270"/>
+            <corners
+                android:radius="14.0sp"/>
+            <size
+                android:width="28.0sp"
+                android:height="28.0sp" />
+            <stroke
+                android:width="4.0sp"
+                android:color="#11000000"/>
+        </shape>
+    </item>
+    <item android:state_checked="false">
+        <shape
+            android:shape="rectangle"
+            android:visible="true"
+            android:dither="true"
+            android:useLevel="false">
+            <gradient
+                android:startColor="@color/disableSwitchColor"
+                android:endColor="@color/disableSwitchColor"
+                android:angle="270"/>
+            <corners
+                android:radius="16.0sp"/>
+            <size
+                android:width="28.0sp"
+                android:height="28.0sp" />
+            <stroke
+                android:width="2.0sp"
+                android:color="#11000000"/>
+        </shape>
+    </item>
+</selector>
