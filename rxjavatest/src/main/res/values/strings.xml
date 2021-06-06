@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">RxJavaTest</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="button_observer_create_complete">button_observer_create_complete</string>
+    <string name="button_observer_create_error">button_observer_create_error</string>
+    <string name="button_observer_just">button_observer_just</string>
+    <string name="button_observer_from_iterable">button_observer_from_iterable</string>
+    <string name="button_observer_from_array4">button_observer_from_array4</string>
+    <string name="button_observer_from_future">button_observer_from_future</string>
+    <string name="button_observer_from_callable">button_observer_from_callable</string>
+    <string name="button_completable">button_completable</string>
+    <string name="button_single">button_single</string>
+    <string name="button_observer_from_publisher" >button_observer_from_publisher</string>
+    <string name="button_observer_from_array">button_observer_from_array</string>
+    <string name="button_observer_create">button_observer_create</string>
+</resources>

@@ -1,3 +1,5 @@
+include ':rxjavatest'
+include ':kotlin-test'
 include ':file_createtest'
 include ':tapjoy'
 include ':applovin_test'

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FirstFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_first_fragment" />
+
+            <Button
+                android:id="@+id/button_observer_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_create" />
+
+            <Button
+                android:id="@+id/button_observer_create_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_create_complete" />
+
+            <Button
+                android:id="@+id/button_observer_create_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_create_error" />
+
+            <Button
+                android:id="@+id/button_observer_just"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_just" />
+
+            <Button
+                android:id="@+id/button_observer_from_array"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_from_array" />
+
+            <Button
+                android:id="@+id/button_observer_from_iterable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_from_iterable" />
+
+            <Button
+                android:id="@+id/button_observer_from_array4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_from_array4" />
+
+            <Button
+                android:id="@+id/button_observer_from_future"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_from_future" />
+
+            <Button
+                android:id="@+id/button_observer_from_publisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_from_publisher" />
+
+            <Button
+                android:id="@+id/button_observer_from_callable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_observer_from_callable" />
+
+            <Button
+                android:id="@+id/button_single"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_single" />
+
+            <Button
+                android:id="@+id/button_completable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_completable" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

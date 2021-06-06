@@ -22,7 +22,7 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
-        maven { url = uri("https://applovin.bintray.com/Quality-Service") }
+        maven { url = uri("https://artifacts.applovin.com/android") }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
