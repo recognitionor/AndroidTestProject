@@ -1,3 +1,4 @@
+include ':architecturetest'
 include ':rxjavatest'
 include ':kotlin-test'
 include ':file_createtest'
