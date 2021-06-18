@@ -1,3 +1,7 @@
+include ':menu'
+include ':tabtest'
+include ':coordinatorlayouttest:tab'
+include ':mvvm_test'
 include ':architecturetest'
 include ':rxjavatest'
 include ':kotlin-test'
