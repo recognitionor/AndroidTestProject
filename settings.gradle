@@ -1,3 +1,4 @@
+include ':viewpagertest2'
 include ':menu'
 include ':tabtest'
 include ':coordinatorlayouttest:tab'
