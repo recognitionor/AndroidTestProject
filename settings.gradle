@@ -14,3 +14,4 @@ include ':fragmenttest', ':mvppatterntest', ':coordinatorlayouttest', ':recycler
 rootProject.name='AndroidTestProject'
 include ':packagemanagertest'
 include ':error-handler-test'
+include ':fileiotest'
