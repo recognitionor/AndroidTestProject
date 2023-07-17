@@ -14,7 +14,6 @@ class TestReferrerReceiver2 : BroadcastReceiver() {
     *
     * */
     override fun onReceive(context: Context?, intent: Intent?) {
-
         Log.d("jhlee", "onReceive2 : ${intent?.getStringExtra("referrer")}")
         Thread {
             var count = 0
