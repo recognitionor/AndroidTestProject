@@ -148,9 +148,11 @@ class MainActivity : AppCompatActivity() {
         playButton = findViewById(R.id.playButton)
         playButton?.setOnClickListener(View.OnClickListener { view: View ->
 //          videoPlayer.setVideoPath(SAMPLE_VIDEO_URL);
+
             requestAds(SAMPLE_VAST_TAG_URL)
             view.visibility = View.GONE
         })
+        Log.d("jhlee", "")
     }
 
     private fun pauseContentForAds() {

@@ -1,73 +1,42 @@
 package com.recognitionor.packagemanagertest
 
 import android.app.Activity
-import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import com.recognitionor.packagemanagertest.databinding.ActivityMainBinding
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : Activity() {
 
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val tv = findViewById<TextView>(R.id.txt)
+        val packageManager = packageManager
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // 모든 설치된 앱 목록 가져오기
+        // 패키지 매니저의 getInstalledApplications 메서드를 사용
+        // GET_META_DATA 플래그를 사용하여 앱 이름 및 아이콘 등의 추가 정보를 얻을 수 있음
 
-        setSupportActionBar(binding.toolbar)
+        // 모든 설치된 앱 목록 가져오기
+        // 패키지 매니저의 getInstalledApplications 메서드를 사용
+        // GET_META_DATA 플래그를 사용하여 앱 이름 및 아이콘 등의 추가 정보를 얻을 수 있음
+//        val flags = PackageManager.MATCH_UNINSTALLED_PACKAGES // 또는 다른 플래그
+        val flags: ApplicationInfoFlags = ApplicationInfoFlags.of(1.toLong())
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            try {
-                val pm: PackageManager = this.packageManager
-//                val info: PackageInfo =
-//                    pm.getPackageInfo("com.nps.adiscope.sampleapp", PackageManager.GET_ACTIVITIES)
-
-                val intent: Intent? = pm.getLaunchIntentForPackage("com.nps.adiscope.sampleapp")
-                Log.d("jhlee", "null : " + (intent == null))
-            } catch (e: Exception) {
-                Log.d("jhlee", "e : " + e.message)
-                Log.d("jhlee", "e : " + e.stackTraceToString())
-            }
+        val sb = StringBuilder()
+        for (app in packageManager.getInstalledApplications(flags)) {
+            // 앱 이름과 패키지 이름을 출력
+            val appName = packageManager.getApplicationLabel(app) as String
+            val packageName = app.packageName
+            sb.append("appName : $appName \npackageName : $packageName \n")
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        tv.text = sb.toString()
     }
 }
