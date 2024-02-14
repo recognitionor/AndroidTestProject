@@ -1,13 +1,13 @@
 package com.jhlee.webviewtest;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.webkit.*;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         WebView webview = findViewById(R.id.webview);
+//        String ws = WebSettings.getDefaultUserAgent(this);
+//        Log.d("jhlee", ws);
         webview.loadDataWithBaseURL("", "<!DOCTYPE html>\n" +
                 "                                                                                                    <html>\n" +
                 "                                                                                                    <head>\n" +
@@ -34,17 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 "                                                                                                    </body>\n" +
                 "                                                                                                    </html>", "text/html", "utf-8", null);
 
-        webview.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Log.d("jhlee", "shouldOverrideUrlLoading1 : " + request.getUrl());
-                return true;
-            }
 
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d("jhlee", "shouldOverrideUrlLoading2 " + url);
-                return true;
-            }
-        });
     }
 }
