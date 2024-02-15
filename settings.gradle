@@ -23,3 +23,7 @@ include ':webviewtest'
 include ':imasdktest'
 include ':recyclerviewtest2'
 include ':contentprovidertest'
+include ':admobnativeadtest'
+include ':nativetemplates'
+
+
