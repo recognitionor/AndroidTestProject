@@ -27,3 +27,4 @@ include ':admobnativeadtest'
 include ':nativetemplates'
 
 
+include ':videotest'

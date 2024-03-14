@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity() {
                 val style = NativeTemplateStyle.Builder().withMainBackgroundColor(color).build()
                 templateAdFrame.setStyles(style)
                 templateAdFrame.setNativeAd(nativeAd)
-                Log.d("jhlee", "nativeAD nativeAd.body : ${nativeAd.body}")
+
+                Log.d("jhlee", "nativeAD nativㄱeAd.body : ${nativeAd.body}")
                 Log.d("jhlee", "nativeAD nativeAd.headline : ${nativeAd.headline}")
                 Log.d("jhlee", "nativeAD nativeAd.advertiser : ${nativeAd.advertiser}")
                 Log.d("jhlee", "nativeAD nativeAd.price : ${nativeAd.price}")
@@ -74,7 +75,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             val videoOptions = VideoOptions.Builder().setStartMuted(true).build()
+            videoOptions.customControlsRequested
             val adOptions = NativeAdOptions.Builder().setVideoOptions(videoOptions).build()
+            adOptions.shouldReturnUrlsForImageAssets()
+
+            adOptions.mediaAspectRatio
             builder.withNativeAdOptions(adOptions)
 
             val adLoader = builder.withAdListener(object : AdListener() {
@@ -95,9 +100,10 @@ class MainActivity : AppCompatActivity() {
 
             val builder = AdLoader.Builder(this, ADMOB_AD_UNIT_ID)
             builder.forNativeAd { nativeAd ->
-                currentNativeAd = nativeAd
+                Log.d("jhlee", "native" + nativeAd.responseInfo.toString())
+//                currentNativeAd = nativeAd
                 val adView = layoutInflater.inflate(R.layout.ad_layout, null) as NativeAdView
-
+//
                 populateNativeAdView(nativeAd, adView)
                 adFrame.removeAllViews()
                 adFrame.addView(adView)
@@ -118,6 +124,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("jhlee", "onAdFailedToLoad : ${loadAdError.message}")
                 }
             }).build()
+
             adLoader.loadAd(AdRequest.Builder().build())
         }
     }
@@ -130,7 +137,6 @@ class MainActivity : AppCompatActivity() {
         val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
 //        val appIconImageView = adView.findViewById<ImageView>(R.id.ad_app_icon)
         val mediaView = adView.findViewById<MediaView>(R.id.ad_test_media)
-
 
         headlineView.text = ad.headline
         mediaView.mediaContent = ad.mediaContent
