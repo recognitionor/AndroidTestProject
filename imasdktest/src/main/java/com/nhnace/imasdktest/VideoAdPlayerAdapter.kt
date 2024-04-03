@@ -63,6 +63,7 @@ class VideoAdPlayerAdapter(
             if (savedAdPosition > 0) {
                 mediaPlayer.seekTo(savedAdPosition)
             }
+
             mediaPlayer.start()
             startAdTracking()
         }

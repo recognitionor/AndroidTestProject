@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <FrameLayout
+    <com.example.videotest.VideoPlayerView
         android:id="@+id/ad_view_frame"
         android:layout_width="match_parent"
         android:layout_height="200dp" />

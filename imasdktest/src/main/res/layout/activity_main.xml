@@ -4,52 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    tools:ignore="MergeRootFrame">
+    tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/videoPlayerContainer"
+    <Button
+        android:id="@+id/go_test"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="go test" />
 
-        <VideoView
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageButton
-            android:id="@+id/playButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:src="@drawable/ic_launcher_background" />
-
-    </RelativeLayout>
-
-
-    <FrameLayout
-        android:id="@+id/videoDescription"
+    <Button
+        android:id="@+id/go_test2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6">
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/playerDescription"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:textSize="15dp" />
-
-        </androidx.core.widget.NestedScrollView>
-
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:text="go test2" />
 
 
 </LinearLayout>
