@@ -42,6 +42,12 @@ class MainActivity : Activity() {
             }
         }
 
+        findViewById<Button>(R.id.go_video).setOnClickListener {
+            Intent(this@MainActivity, VideoAdsActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
 
         Log.d("jhlee", "onCreate")
     }

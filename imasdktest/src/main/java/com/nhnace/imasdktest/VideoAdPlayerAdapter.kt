@@ -17,9 +17,7 @@ import kotlin.math.log
 
 /** Example implementation of IMA's VideoAdPlayer interface.  */
 class VideoAdPlayerAdapter(
-    private val videoPlayer: VideoView,
-    audioManager: AudioManager,
-    private val logListener: (msg: String) -> Unit
+    private val videoPlayer: VideoView, audioManager: AudioManager
 ) : VideoAdPlayer {
     private val audioManager: AudioManager
     private val videoAdPlayerCallbacks: MutableList<VideoAdPlayerCallback> = ArrayList()
@@ -50,13 +48,11 @@ class VideoAdPlayerAdapter(
 
     override fun pauseAd(adMediaInfo: AdMediaInfo) {
         Log.i(LOGTAG, "pauseAd")
-        logListener.invoke("pauseAd")
         savedAdPosition = videoPlayer.currentPosition
         stopAdTracking()
     }
 
     override fun playAd(adMediaInfo: AdMediaInfo) {
-        logListener.invoke("playAD")
         videoPlayer.setVideoURI(Uri.parse(adMediaInfo.url))
         videoPlayer.setOnPreparedListener { mediaPlayer: MediaPlayer ->
             adDuration = mediaPlayer.duration
@@ -68,15 +64,12 @@ class VideoAdPlayerAdapter(
             startAdTracking()
         }
         videoPlayer.setOnErrorListener { mediaPlayer: MediaPlayer?, errorType: Int, extra: Int ->
-            logListener.invoke("setOnErrorListener")
 
             notifyImaSdkAboutAdError(
                 errorType
             )
         }
         videoPlayer.setOnCompletionListener { mediaPlayer: MediaPlayer? ->
-            logListener.invoke("setOnCompletionListener")
-
             savedAdPosition = 0
             notifyImaSdkAboutAdEnded()
         }
@@ -84,7 +77,6 @@ class VideoAdPlayerAdapter(
 
     override fun release() {
         // any clean up that needs to be done.
-        logListener.invoke("release")
     }
 
     override fun removeCallback(videoAdPlayerCallback: VideoAdPlayerCallback) {
@@ -93,7 +85,6 @@ class VideoAdPlayerAdapter(
 
     override fun stopAd(adMediaInfo: AdMediaInfo) {
         Log.i(LOGTAG, "stopAd")
-        logListener.invoke("stopAd")
         stopAdTracking()
     }
 
@@ -106,7 +97,6 @@ class VideoAdPlayerAdapter(
 
     private fun startAdTracking() {
         Log.i(LOGTAG, "startAdTracking")
-        logListener.invoke("startAdTracking")
         if (timer != null) {
             return
         }
@@ -122,7 +112,6 @@ class VideoAdPlayerAdapter(
 
     private fun notifyImaSdkAboutAdEnded() {
         Log.i(LOGTAG, "notifyImaSdkAboutAdEnded")
-        logListener.invoke("notifyImaSdkAboutAdEnded")
         savedAdPosition = 0
         for (callback in videoAdPlayerCallbacks) {
             callback.onEnded(loadedAdMediaInfo!!)
@@ -130,7 +119,6 @@ class VideoAdPlayerAdapter(
     }
 
     private fun notifyImaSdkAboutAdProgress(adProgress: VideoProgressUpdate) {
-        logListener.invoke("notifyImaSdkAboutAdProgress")
         for (callback in videoAdPlayerCallbacks) {
             callback.onAdProgress(loadedAdMediaInfo!!, adProgress)
         }
@@ -143,20 +131,17 @@ class VideoAdPlayerAdapter(
      */
     private fun notifyImaSdkAboutAdError(errorType: Int): Boolean {
         Log.i(LOGTAG, "notifyImaSdkAboutAdError")
-        logListener.invoke("notifyImaSdkAboutAdError")
         when (errorType) {
             MediaPlayer.MEDIA_ERROR_UNSUPPORTED -> {
                 Log.e(
                     LOGTAG, "notifyImaSdkAboutAdError: MEDIA_ERROR_UNSUPPORTED"
                 )
-                logListener.invoke("notifyImaSdkAboutAdError: MEDIA_ERROR_UNSUPPORTED")
             }
 
             MediaPlayer.MEDIA_ERROR_TIMED_OUT -> {
                 Log.e(
                     LOGTAG, "notifyImaSdkAboutAdError: MEDIA_ERROR_TIMED_OUT"
                 )
-                logListener.invoke("notifyImaSdkAboutAdError: MEDIA_ERROR_TIMED_OUT")
             }
 
             else -> {}
@@ -169,7 +154,6 @@ class VideoAdPlayerAdapter(
 
     fun notifyImaOnContentCompleted() {
         Log.i(LOGTAG, "notifyImaOnContentCompleted")
-        logListener.invoke("notifyImaOnContentCompleted")
         for (callback in videoAdPlayerCallbacks) {
             callback.onContentComplete()
         }
@@ -177,7 +161,6 @@ class VideoAdPlayerAdapter(
 
     private fun stopAdTracking() {
         Log.i(LOGTAG, "stopAdTracking")
-        logListener.invoke("stopAdTracking")
         if (timer != null) {
             timer!!.cancel()
             timer = null
@@ -185,7 +168,6 @@ class VideoAdPlayerAdapter(
     }
 
     override fun getAdProgress(): VideoProgressUpdate {
-        logListener.invoke("getAdProgress")
         val adPosition = videoPlayer.currentPosition.toLong()
         return VideoProgressUpdate(adPosition, adDuration.toLong())
     }

@@ -27,6 +27,11 @@
 
         <activity android:name=".TestActivity" />
         <activity android:name=".TagTestActivity" />
+        <activity
+            android:name=".VideoAdsActivity"
+            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>

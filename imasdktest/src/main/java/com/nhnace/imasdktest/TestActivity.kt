@@ -25,9 +25,7 @@ class TestActivity : AppCompatActivity() {
         val videoPlayerContainer = findViewById<ViewGroup>(R.id.videoPlayerContainer)
         val playBtn = findViewById<ImageButton>(R.id.playButton)
 
-        val videoAdPlayerAdapter = VideoAdPlayerAdapter(videoPlayer!!, audioManager) {
-
-        }
+        val videoAdPlayerAdapter = VideoAdPlayerAdapter(videoPlayer!!, audioManager)
         val imaSdkFactory = ImaSdkFactory.getInstance()
         val settings = imaSdkFactory.createImaSdkSettings()
         val adDisplayContainer =

@@ -1,79 +1,107 @@
 package com.nhnace.imasdktest
 
 
+import android.app.Activity
 import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.Button
 import android.widget.VideoView
-import androidx.appcompat.app.AppCompatActivity
 import com.google.ads.interactivemedia.v3.api.AdEvent
+import com.google.ads.interactivemedia.v3.api.AdsManager
+import com.google.ads.interactivemedia.v3.api.AdsManagerLoadedEvent
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
-import com.google.ads.interactivemedia.v3.api.player.ContentProgressProvider
-import com.google.ads.interactivemedia.v3.api.player.VideoProgressUpdate
 
-/** Main activity.  */
-class TagTestActivity : AppCompatActivity() {
+
+class TagTestActivity : Activity(), View.OnClickListener {
+
+    companion object {
+        var LOAD_TIME: Long = 0
+        var SHOW_TIME: Long = 0
+    }
+
+    lateinit var videoPlayer: VideoView
+    lateinit var videoPlayerContainer: ViewGroup
+    lateinit var audioManager: AudioManager
+    lateinit var adsManagerLoadedEvent: AdsManagerLoadedEvent
+    lateinit var adsManager: AdsManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("jhlee", "onCreate")
-        val vastString: String = this.assets.open("vast.xml").bufferedReader().use { it.readText() }
 
-        setContentView(R.layout.activity_test)
+        setContentView(R.layout.activity_exo_test)
 
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        val videoPlayer = findViewById<VideoView>(R.id.videoView)
-        val videoPlayerContainer = findViewById<ViewGroup>(R.id.videoPlayerContainer)
-        val playBtn = findViewById<ImageButton>(R.id.playButton)
+        findViewById<Button>(R.id.test_load_btn).setOnClickListener(this)
+        findViewById<Button>(R.id.test_load2_btn).setOnClickListener(this)
+        findViewById<Button>(R.id.test_load3_btn).setOnClickListener(this)
 
-        val imaSdkFactory = ImaSdkFactory.getInstance()
-        val settings = imaSdkFactory.createImaSdkSettings()
-        val videoAdPlayerAdapter = VideoAdPlayerAdapter(videoPlayer!!, audioManager) {
-            Log.d("jhlee", "videoAdPlayerAdapter")
-        }
+        videoPlayer = findViewById(R.id.videoView)
+        videoPlayerContainer = findViewById(R.id.videoPlayerContainer)
+    }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.test_load_btn -> {
+                LOAD_TIME = System.currentTimeMillis()
+                Log.d("jhlee", "1")
+                val vastString: String =
+                    this.assets.open("vast.xml").bufferedReader().use { it.readText() }
+                val imaSdkFactory = ImaSdkFactory.getInstance()
+                val settings = imaSdkFactory.createImaSdkSettings()
+                val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+                val videoAdPlayerAdapter = VideoAdPlayerAdapter(videoPlayer, audioManager)
+                val adDisplayContainer = ImaSdkFactory.createAdDisplayContainer(
+                    videoPlayerContainer, videoAdPlayerAdapter
+                )
+                val adsLoader =
+                    ImaSdkFactory.getInstance().createAdsLoader(this, settings, adDisplayContainer)
+                adsLoader.addAdsLoadedListener {
+                    adsManager = it.adsManager
+                    val renderingSettings = ImaSdkFactory.getInstance().createAdsRenderingSettings()
+                    adsManager.addAdEventListener { event ->
+                        if (event.type == AdEvent.AdEventType.STARTED) {
+                            Log.d("jhlee", "STARTED")
+                            videoPlayerContainer.visibility = View.GONE
+                            videoPlayer.pause()
+                        }
 
-        val adDisplayContainer =
-            ImaSdkFactory.createAdDisplayContainer(videoPlayerContainer, videoAdPlayerAdapter)
-        val adsLoader =
-            ImaSdkFactory.getInstance().createAdsLoader(this, settings, adDisplayContainer)
-        // Create the ads request.
-        val request = imaSdkFactory.createAdsRequest()
-        request.adsResponse = vastString
+                        if (event.type != AdEvent.AdEventType.AD_PROGRESS) {
+                            Log.d(
+                                "jhlee",
+                                "event : ${event.type} : ${System.currentTimeMillis() - LOAD_TIME}- ${System.currentTimeMillis() - SHOW_TIME}"
+                            )
+                        }
 
-        request.contentProgressProvider = ContentProgressProvider {
-            if (videoPlayer.duration <= 0) {
-                return@ContentProgressProvider VideoProgressUpdate.VIDEO_TIME_NOT_READY
-            }
-            VideoProgressUpdate(
-                videoPlayer.currentPosition.toLong(), videoPlayer.duration.toLong()
-            )
-        }
-
-        adsLoader.addAdsLoadedListener {
-            Log.d("jhlee", "adsLoader.addAdsLoadedListener")
-            val adsRenderingSettings = ImaSdkFactory.getInstance().createAdsRenderingSettings()
-            it.adsManager.addAdEventListener { it ->
-                if (it.type == AdEvent.AdEventType.CONTENT_RESUME_REQUESTED) {
-//                    videoPlayer.setVideoPath(MainActivity.SAMPLE_URL)
-//                    videoPlayer.setMediaController(MediaController(this))
-                    videoPlayer.setOnPreparedListener { mediaPlayer: MediaPlayer ->
-                        mediaPlayer.start()
                     }
-                    videoPlayer.setOnCompletionListener { mediaPlayer: MediaPlayer? -> videoAdPlayerAdapter.notifyImaOnContentCompleted() }
+
+//                    adsManager.init(renderingSettings)
+                    adsManager.init()
+                    adsManager.start()
+
+
                 }
-                Log.d("jhlee", "it : ${it.type.name}")
+                // Create the ads request.
+                val request = imaSdkFactory.createAdsRequest()
+                request.adsResponse = vastString
+                adsLoader.requestAds(request)
+                videoPlayerContainer.visibility = View.GONE
+//                videoPlayer.visibility = View.GONE
             }
 
-            it.adsManager.init(adsRenderingSettings)
-            it.adsManager.start()
+            R.id.test_load2_btn -> {
+                SHOW_TIME = System.currentTimeMillis()
+                videoPlayer.pause()
+                Log.d("jhlee", "SHOW")
+            }
 
-            playBtn.visibility = View.GONE
+            R.id.test_load3_btn -> {
+                Log.d("jhlee", "3")
+                videoPlayerContainer.visibility = View.VISIBLE
+                videoPlayer.start()
+            }
         }
-        adsLoader.requestAds(request)
-        videoPlayer.start()
     }
 }
