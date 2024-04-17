@@ -19,6 +19,12 @@
         android:text="go test2" />
 
     <Button
+        android:id="@+id/go_ad_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="go_ad_video" />
+
+    <Button
         android:id="@+id/go_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

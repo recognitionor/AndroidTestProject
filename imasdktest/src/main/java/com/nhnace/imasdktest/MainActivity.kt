@@ -43,6 +43,12 @@ class MainActivity : Activity() {
         }
 
         findViewById<Button>(R.id.go_video).setOnClickListener {
+            Intent(this@MainActivity, VideoTestActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+        findViewById<Button>(R.id.go_ad_video).setOnClickListener {
             Intent(this@MainActivity, VideoAdsActivity::class.java).apply {
                 startActivity(this)
             }

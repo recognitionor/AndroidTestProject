@@ -29,7 +29,7 @@ class StaggeredTestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAdapter = activity?.let { StaggeredTestAdapter(it) }!!
+//        mAdapter = activity?.let { StaggeredTestAdapter(it) }!!
         mRecyclerView.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
 

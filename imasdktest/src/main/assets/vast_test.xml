@@ -1,0 +1,70 @@
+<VAST version="2.0">
+    <Ad id="tJxzTPAomzZV20jj.a.DVkTZHel3sYEgAAr">
+        <InLine>
+            <Impression>
+                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/impression/1}]]></Impression>
+            <AdSystem version="2.0"></AdSystem>
+            <AdTitle><![CDATA[tJxzTPAomzZV20jj.a.DVkTZHel3sYEgAAr]]></AdTitle>
+            <Impression id="tJxzTPAomzZV20jj.a.DVkTZHel3sYEgAAr">
+                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/impression/2]]></Impression>
+            <Impression id="tJxzTPAomzZV20jj.a.DVkTZHel3sYEgAAr">
+                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/impression/3]]></Impression>
+            <Impression>
+                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/impression/4]]></Impression>
+            <Impression>
+                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/impression/5]]></Impression>
+            <Impression>
+                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/impression/6]]></Impression>
+            <Creatives>
+                <Creative>
+                    <Linear>
+                        <Duration>00:00:06</Duration>
+                        <TrackingEvents>
+                            <Tracking event="firstQuartile">
+                                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/tracking/1]]></Tracking>
+                            <Tracking event="midpoint">
+                                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/tracking/2]]></Tracking>
+                            <Tracking event="thirdQuartile">
+                                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/tracking/3]]></Tracking>
+                            <Tracking event="complete">
+                                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/tracking/4]]></Tracking>
+                        </TrackingEvents>
+                        <VideoClicks>
+                            <ClickTracking>
+                                <![CDATA[https://naver.com]]></ClickTracking>
+                            <ClickThrough>
+                                <![CDATA[https://naver.com]]></ClickThrough>
+                        </VideoClicks>
+                        <MediaFiles>
+                            <MediaFile delivery="progressive" height="640"
+                                id="tJxzTPAomzZV20jj.a.DVkTZHel3sYEgAAr" type="video/mp4"
+                                width="640">
+                                <![CDATA[https://cdn-f.adsmoloco.com/JfgNcLu0Y3dhgzkB/creative/l3b8io1a_.m5v_lgeyhls36wdzqpsx.mp4]]></MediaFile>
+                        </MediaFiles>
+                    </Linear>
+                    <CreativeExtensions></CreativeExtensions>
+                </Creative>
+                <Creative>
+                    <CompanionAds>
+                        <Companion assetHeight="0" assetWidth="0" expandedHeight="0"
+                            expandedWidth="0" height="1720" id="tJxzTPAomzZV20jj.a.DVkTZHel3sYEgAAr"
+                            width="720">
+                            <CompanionClickThrough>
+                                <![CDATA[https://3640-103-243-200-17.ngrok-free.app/click/1]]></CompanionClickThrough>
+                            <TrackingEvents>
+                                <Tracking event="creativeView">
+                                    <![CDATA[https://3640-103-243-200-17.ngrok-free.app/createview/1]]></Tracking>
+                            </TrackingEvents>
+                            <StaticResource creativeType="image/jpeg">
+                                <![CDATA[https://cdn-f.adsmoloco.com/JfgNcLu0Y3dhgzkB/creative/l3b8ivpm_.i34_lpcmdqmxsanuo4k8.jpg]]></StaticResource>
+                        </Companion>
+                    </CompanionAds>
+                    <CreativeExtensions></CreativeExtensions>
+                </Creative>
+            </Creatives>
+            <Description></Description>
+            <Survey></Survey>
+            <Extensions></Extensions>
+        </InLine>
+    </Ad>
+</VAST>
