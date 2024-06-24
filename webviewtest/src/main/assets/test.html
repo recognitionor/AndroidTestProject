@@ -1,11 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ready Story</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="icon" href="images/favicon.png" />
+<!--    <script src="mraid2.js"></script>-->
 </head>
-<body>
 
-<h1 id="sample-title">Sample for the injected local js file.</h1>
-<script type="text/javascript" src="sample.js"></script>
+<body>
+<div id="imageContainer">
+    <img src="https://nhnace.com/share/img/logo_main_ci.png" width="300" height="250" />
+</div>
+
+<!--<script src="mraid2.js"></script> &lt;!&ndash; MRAID 스크립트 로드 &ndash;&gt;-->
+<script>
+    alert(mraid.getVersion());
+
+    function addEvent(evnt, elem, func) {
+        if (elem.addEventListener) { // W3C DOM
+            elem.addEventListener(evnt, func, false);
+        } else if (elem.attachEvent) { // IE DOM
+            elem.attachEvent("on" + evnt, func);
+        } else { // No much to do
+            elem[evnt] = func;
+        }
+    }
+
+    function displayAd() {
+        // Uncomment the following lines if you need these event listeners
+        // mraid.addEventListener("stateChange", stateChangeHandler);
+        // mraid.addEventListener("sizeChange", sizeChangeHandler);
+        // mraid.addEventListener("viewableChange", viewableChangeHandler);
+        // mraid.addEventListener("error", errorHandler);
+        console.log("displayAd");
+        var adContainer = document.querySelector('#imageContainer');
+            addEvent("click", adContainer, function (e) {
+                console.log("click");
+                e.preventDefault();
+                mraid.open('https://www.nhnace.com/bannerinfo');
+                return false;
+            });
+    }
+
+    function readyAdPage() {
+        console.log("readyAdPage");
+        mraid.removeEventListener("ready", readyAdPage);
+        displayAd();
+    }
+
+    function detectAdPageStatus() {
+        console.log("detectAdPageStatus : " + document.readyState);
+        var success = false;
+
+        if (document.readyState === 'complete') {
+            if (typeof (mraid) === "undefined") {
+                setTimeout(detectAdPageStatus, 250);
+            } else {
+                if (mraid.getState() === 'loading') {
+                    mraid.addEventListener('ready', readyAdPage);
+                    mraid.addEventListener('error', function(message, action) {
+                        alert('Error [' + action + ']' + message);
+                    });
+                } else if (mraid.getState() === 'default') {
+                    displayAd();
+                }
+                success = true;
+            }
+        }
+
+        return success;
+    }
+
+    detectAdPageStatus();
+</script>
 </body>
 </html>

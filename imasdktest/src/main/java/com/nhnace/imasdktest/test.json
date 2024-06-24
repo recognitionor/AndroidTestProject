@@ -1,0 +1,31 @@
+{
+  "result": 0,
+  "message": "success",
+  "data": {
+    "interval": 600,
+    "xcommon": {},
+    "xsmart": {},
+    "xpreload": {},
+    "xschedule": {},
+    "native": {
+      "nativeType": 1,
+      "isInterstitial": true,
+      "frequency": 1,
+      "cap": 4
+    },
+    "video": {
+      "expiredDate": "122221111",
+      "closeOffset": "4000",
+      "rewardOffset": "9000",
+      "skipOffset": 1,
+      "orientation": true,
+      "companion": true,
+      "useReward": true,
+      "mediationPlatform": [
+        "title",
+        "mediaContent"
+      ],
+      "nativeSchedule": true
+    }
+  }
+}
