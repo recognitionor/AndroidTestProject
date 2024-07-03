@@ -28,3 +28,4 @@ include ':nativetemplates'
 
 
 include ':videotest'
+include ':ad-manager'
