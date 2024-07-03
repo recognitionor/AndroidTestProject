@@ -5,6 +5,7 @@
         <!-- For activities that don't use ads, hardwareAcceleration can be false. -->
     <application
         android:allowBackup="true"
+        android:testOnly="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:hardwareAccelerated="true"
