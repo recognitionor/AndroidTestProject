@@ -29,3 +29,5 @@ include ':nativetemplates'
 
 include ':videotest'
 include ':ad-manager'
+include ':aarTest'
+include ':aartester'

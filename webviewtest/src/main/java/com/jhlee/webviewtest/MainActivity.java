@@ -6,11 +6,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.*;
 
 import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.widget.NestedScrollView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 public class MainActivity extends AppCompatActivity {
     private NonLeakingWebView mWebView;
 
-    private FrameLayout content;
+    private NestedScrollView content;
 
     private MRAIDImplementation mraidImpl;
 
@@ -48,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.d("jhlee", "onCreate");
+        Float scale = this.getResources().getDisplayMetrics().density;
+        Log.d("jhlee", "onCreate : " + scale);
 //        findViewById(R.id.test_btn).setOnClickListener(v -> {
 //            Log.d("jhlee", "test");
 //            String test = "javascript:window.mraid.getVendor()";
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 content.addView(mWebView);
+
 //                mWebView.requestLayout();
                 mWebView.invalidate();
                 // 여기에 있어야 하는데 일단 로그
@@ -160,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     // 광고 컨텐츠를 반환하는 메서드
     private String getAdContent() {
         try {
-            String test = new BufferedReader(new InputStreamReader(this.getAssets().open("error-fixed.html"))).lines().collect(Collectors.joining("\n"));
+            String test = new BufferedReader(new InputStreamReader(this.getAssets().open("neflix.html"))).lines().collect(Collectors.joining("\n"));
             Log.d("jhlee", "test : " + test);
 
             return test;

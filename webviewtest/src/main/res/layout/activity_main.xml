@@ -7,10 +7,12 @@
               android:orientation="vertical"
               tools:context=".MainActivity">
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
             android:id="@+id/webview"
-            android:layout_width="320dp"
-            android:layout_height="480dp"
+            android:layout_width="960dp"
+
+
+            android:layout_height="1440dp"
     />
 
     <Button android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
