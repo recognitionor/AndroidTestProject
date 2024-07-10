@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aarTester</string>
+    <string name="kill_str">test1</string>
+    <string name="test_str">test1</string>
+</resources>
