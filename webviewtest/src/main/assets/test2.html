@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebView Example</title>
-    <script type="text/javascript" src="mraid.js"></script>
+    <script>window.MRAID_ENV = {"version":"1.0","sdk":"NHNACE_ADLIB","sdkVersion":"1.0.3","appId":"com.jhlee.webviewtest"};</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1>WebView Example</h1>
-<button onclick="mraid.util.pageFinished()">Call JavaScript Function</button>
+test~!
 </body>
+<script>
+    console.log("MRAID_ENV ~~~~~~~~~: ");
+    console.log("MRAID_ENV 1 : " + (window.MRAID_ENV === undefined));
+</script>
 </html>
