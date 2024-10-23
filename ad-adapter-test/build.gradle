@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace 'com.nhnace.adnetwroktest'
-    compileSdk 33
+    namespace 'com.ham.ad_adapter_test'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.nhnace.adnetwroktest"
+        applicationId "com.ham.ad_adapter_test"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -30,14 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    task testA {
-        println "testA!!!!!!!!!!!!!"
-    }
 }
 
 dependencies {
-//    implementation(fileTree(mapOf("include" to listOf("*.aar"), "dir" to "libs")))
 
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
@@ -47,14 +42,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-    // 네이티브만 포함할 경우
-
-    // 전면/배너만 포함할 경우
-//    implementation "com.github.adxcorp.ADXLibrary_Android:adx-library-standard:2.4.0"
-
-    // 리워드 비디오만 포함할 경우
-//    implementation "com.github.adxcorp.ADXLibrary_Android:adx-library-rewarded-video:2.4.0"
-
-
+    implementation 'com.google.android.gms:play-services-ads:23.1.0'
 }
