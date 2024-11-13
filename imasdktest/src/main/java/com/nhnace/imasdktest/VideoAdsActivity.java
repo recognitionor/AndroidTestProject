@@ -20,13 +20,16 @@ import com.google.ads.interactivemedia.v3.api.AdsManager;
 import com.google.ads.interactivemedia.v3.api.AdsManagerLoadedEvent;
 import com.google.ads.interactivemedia.v3.api.AdsRenderingSettings;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
+import com.google.ads.interactivemedia.v3.api.CompanionAdSlot;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import com.google.ads.interactivemedia.v3.api.ImaSdkSettings;
+import com.google.android.exoplayer2.ext.ima.ImaAdsLoader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class VideoAdsActivity extends Activity implements View.OnClickListener, AdsLoader.AdsLoadedListener {
@@ -52,49 +55,68 @@ public class VideoAdsActivity extends Activity implements View.OnClickListener, 
 
     View closeBtn;
 
+    static public long time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("jhlee", "onCreate");
         setContentView(R.layout.adlib_activity_video_layout);
         closeBtn = findViewById(R.id.close_btn);
         closeBtn.setOnClickListener(this);
         findViewById(R.id.test_load_btn).setOnClickListener(this);
         findViewById(R.id.test_load2_btn).setOnClickListener(this);
         findViewById(R.id.test_load3_btn).setOnClickListener(this);
-
+        time = System.currentTimeMillis();
+        Log.d("jhlee", "onCreate time1 : " + (System.currentTimeMillis() - time));
         initVideoPlayerView();
+        Log.d("jhlee", "onCreate time2 : " + (System.currentTimeMillis() - time));
         initVideoLoader();
+        Log.d("jhlee", "onCreate time3 : " + (System.currentTimeMillis() - time));
     }
 
     private void initVideoPlayerView() {
         videoPlayerContainer = findViewById(R.id.videoPlayerContainer);
         videoPlayer = findViewById(R.id.videoView);
+        ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
     }
 
     private void initVideoLoader() {
-        Log.d("jhlee", "initVideoLoader");
+
+        Log.d("jhlee", "initVideoLoader time1 : " + (System.currentTimeMillis() - time));
         String vastString = "";
         try {
-            vastString = new BufferedReader(new InputStreamReader(this.getAssets().open("vast_test.xml"))).lines().collect(Collectors.joining("\n"));
+            vastString = new BufferedReader(new InputStreamReader(this.getAssets().open("vast4.xml"))).lines().collect(Collectors.joining("\n"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.d("jhlee", "initVideoLoader time2 : " + (System.currentTimeMillis() - time));
         ImaSdkFactory imaSdkFactory = ImaSdkFactory.getInstance();
         ImaSdkSettings settings = imaSdkFactory.createImaSdkSettings();
         settings.setAutoPlayAdBreaks(false);
+
+        // Companion View Group 및 Companion Ad Slot 설정
+//        ViewGroup companionViewGroup = findViewById(R.id.companionAdSlot);
+//        CompanionAdSlot companionAdSlot = imaSdkFactory.createCompanionAdSlot();
+//        companionAdSlot.setContainer(companionViewGroup);
+//        companionAdSlot.setSize(300, 250);  // 고정된 크기 설정 (테스트용)
+
+
+        ArrayList<CompanionAdSlot> companionAdSlots = new ArrayList<>();
+//        companionAdSlots.add(companionAdSlot);
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        AdDisplayContainer adDisplayContainer = ImaSdkFactory.createAdDisplayContainer(videoPlayerContainer, new VideoAdPlayerAdapter(videoPlayer, audioManager));
+//        adDisplayContainer.setCompanionSlots(companionAdSlots);
 
-
-        VideoAdPlayerAdapter videoAdPlayerAdapter = new VideoAdPlayerAdapter(videoPlayer, audioManager);
-        AdDisplayContainer adDisplayContainer = ImaSdkFactory.createAdDisplayContainer(videoPlayerContainer, videoAdPlayerAdapter);
-        AdsLoader adsLoader = ImaSdkFactory.getInstance().createAdsLoader(this, settings, adDisplayContainer);
-
+        adsLoader = imaSdkFactory.createAdsLoader(this, settings, adDisplayContainer);
         adsLoader.addAdsLoadedListener(this);
+
         AdsRequest request = imaSdkFactory.createAdsRequest();
         request.setAdsResponse(vastString);
         request.setContentProgressProvider(() -> null);
+        Log.d("jhlee", "initVideoLoader time3 : " + (System.currentTimeMillis() - time));
         adsLoader.requestAds(request);
+
     }
 
     @Override
@@ -147,32 +169,65 @@ public class VideoAdsActivity extends Activity implements View.OnClickListener, 
 
     @Override
     public void onAdsManagerLoaded(@NonNull AdsManagerLoadedEvent adsManagerLoadedEvent) {
-        Log.d("jhlee", "onAdsManagerLoaded");
+        Log.d("jhlee", "onAdsManagerLoaded time1 : " + (System.currentTimeMillis() - time));
         adsManager = adsManagerLoadedEvent.getAdsManager();
 
-        AdsRenderingSettings renderingSettings = ImaSdkFactory.getInstance().createAdsRenderingSettings();
-        renderingSettings.setEnablePreloading(true);
+//        AdsRenderingSettings renderingSettings = ImaSdkFactory.getInstance().createAdsRenderingSettings();
+//        renderingSettings.setEnablePreloading(true);
         adsManager.addAdEventListener(adEvent -> {
 
+            Log.d("jhlee", "onAdsManagerLoaded adEvent : " + (System.currentTimeMillis() - time) + "-" +adEvent.getType().name());
 
             switch (adEvent.getType()) {
+                case CONTENT_PAUSE_REQUESTED:{
+                    Log.d("jhlee", "onAdsManagerLoaded CONTENT_PAUSE_REQUESTED : " + (System.currentTimeMillis() - time));
+                    adsManager.resume();
+                    videoPlayer.start();
+                    break;
+                }
+                case RESUMED: {
+                    Log.d("jhlee", "onAdsManagerLoaded RESUMED : " + (System.currentTimeMillis() - time));
+                    break;
+                }
+                case STARTED: {
+                    Log.d("jhlee", "onAdsManagerLoaded STARTED : " + (System.currentTimeMillis() - time));
+                    break;
+                }
+                case AD_BUFFERING: {
+                    Log.d("jhlee", "onAdsManagerLoaded AD_BUFFERING : " + (System.currentTimeMillis() - time));
+                    break;
+                }
+                case CONTENT_RESUME_REQUESTED: {
+                    Log.d("jhlee", "onAdsManagerLoaded CONTENT_RESUME_REQUESTED : " + (System.currentTimeMillis() - time));
+                    break;
+                }
                 case AD_PROGRESS: {
+                    Log.d("jhlee", "onAdsManagerLoaded AD_PROGRESS : " + (System.currentTimeMillis() - time) + "-" + videoPlayer.getCurrentPosition());
                     if (4000 < videoPlayer.getCurrentPosition()) {
                         closeBtn.setVisibility(View.VISIBLE);
                     }
                     break;
                 }
                 case LOADED: {
+                    Log.d("jhlee", "onAdsManagerLoaded LOADED 1: " + (System.currentTimeMillis() - time));
                     isAdPlaying = true;
                     clickUrl = getClickUrl(adsManager.getCurrentAd());
                     adsManager.start();
+                    videoPlayer.start();
+                    Log.d("jhlee", "onAdsManagerLoaded LOADED 2: " + (System.currentTimeMillis() - time));
                     break;
                 }
                 case ALL_ADS_COMPLETED: {
+//                    findViewById(R.id.companionAdSlot).setVisibility(View.VISIBLE);
+                    Log.d("jhlee", "ALL_ADS_COMPLETED");
                     videoPlayer.setOnClickListener(v -> {
                         goClickUrl();
                     });
                     isEnded = true;
+                    break;
+                }
+                case COMPLETED: {
+                    Log.d("jhlee", "COMPLETED");
                     break;
                 }
                 case CLICKED: {

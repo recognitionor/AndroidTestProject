@@ -11,6 +11,8 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import java.lang.Thread
+import java.net.URLConnection
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adView = findViewById<AdView>(R.id.adView)
         val btn = findViewById<Button>(R.id.btn)
+        
         MobileAds.initialize(
             this
         ) { }
-
         btn.setOnClickListener {
             Log.d("jhlee", "click")
             adView.visibility = View.VISIBLE

@@ -10,7 +10,7 @@
         android:theme="@style/Theme.AndroidTestProject">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4279642319532137~6855116566" />
+            android:value="ca-app-pub-4279642319532137~8779450631" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
