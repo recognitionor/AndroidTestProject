@@ -43,7 +43,7 @@ class MainActivity : Activity(), CompoundButton.OnCheckedChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("jhlee", "MainActivity : $this");
+        Log.d("jhlee", "MainActivity ~~~~~~~ : $this");
         setContentView(R.layout.activity_main)
         frame = findViewById(R.id.frame)
         btnBack = findViewById(R.id.btn_back)
@@ -94,6 +94,7 @@ class MainActivity : Activity(), CompoundButton.OnCheckedChangeListener {
     }
 
     private fun load() {
+        log.text = ""
         webView = WebView(this)
         frame.removeAllViews()
         frame.addView(webView)
@@ -126,9 +127,10 @@ class MainActivity : Activity(), CompoundButton.OnCheckedChangeListener {
                     val url = request?.url?.toString()
                     if (request?.isForMainFrame == true && !request.isRedirect && request.hasGesture()) {
                         // 여기서만 원하는 처리를 해줌
-                        Log.d("jhlee", "shouldOverrideUrlLoading : $selectRadio")
+                        Log.d("jhlee", "shouldOverrideUrlLoading!! : $selectRadio")
                         when (selectRadio) {
                             1 -> {
+                                Log.d("jhlee", "shouldOverrideUrlLoading : 111")
                                 val intent = Intent(this@MainActivity, TestActivity::class.java)
                                 val bundle = Bundle()
                                 bundle.putString("url", url)
@@ -138,10 +140,12 @@ class MainActivity : Activity(), CompoundButton.OnCheckedChangeListener {
                             }
 
                             2 -> {
+                                Log.d("jhlee", "shouldOverrideUrlLoading : 222")
                                 return false
                             }
 
                             else -> {
+                                Log.d("jhlee", "shouldOverrideUrlLoading : 333")
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                 startActivity(intent)
                                 return true
@@ -185,7 +189,7 @@ class MainActivity : Activity(), CompoundButton.OnCheckedChangeListener {
                                 else -> {
                                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                     startActivity(intent)
-                                    return true // 외부 브라우저에서 열기
+                                    return false // 외부 브라우저에서 열기
                                 }
                             }
                         }
