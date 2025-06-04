@@ -1,3 +1,33 @@
-<script src="mraid.jdsddss"></script>
-<h1>Hello, WebView</h1>
-<p>HTML string.</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        button {
+            font-size: 15px;    /* 글씨 크게 */
+            padding: 10px 20px; /* 상하 20px, 좌우 40px */
+            margin: 10px 0;     /* 위아래 간격 */
+            border-radius: 10px;/* 둥근 테두리 */
+        }
+    </style>
+</head>
+<body>
+<h2>window.open() 실험</h2>
+<div class="row">
+    <button onclick="window.open('https://naver.com', '_self')">_self로 window.open</button>
+    <a href="https://naver.com" target="_self">a태그 _self</a>
+</div>
+<div class="row">
+    <button onclick="window.open('https://daum.net', '_blank')">_blank로 window.open</button>
+    <a href="https://daum.net" target="_blank">a태그 _blank</a>
+</div>
+<div class="row">
+    <button onclick="window.open('https://bing.com', '_parent', 'width=400,height=400')">_parent로 window.open</button>
+    <a href="https://bing.com" target="_parent">a태그 _parent</a>
+</div>
+<div class="row">
+    <button onclick="window.open('https://yahoo.com', '_top')">_top로 window.open</button>
+    <a href="https://yahoo.com" target="_top">a태그 _top</a>
+</div>
+<br><br>
+</body>
+</html>

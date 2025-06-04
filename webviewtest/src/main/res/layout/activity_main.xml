@@ -1,21 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <androidx.core.widget.NestedScrollView
-            android:id="@+id/webview"
-            android:layout_width="960dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_load"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="load" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="back" />
+    </LinearLayout>
 
 
-            android:layout_height="1440dp"
-    />
+    <CheckBox
+        android:id="@+id/check_box_WebChromeClient_onCreateWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="WebChromeClient.onCreateWindow" />
 
-    <Button android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+    <CheckBox
+        android:id="@+id/check_box_WebViewClient_shouldOverrideUrlLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="WebViewClient.shouldOverrideUrlLoading" />
 
+    <CheckBox
+        android:id="@+id/check_box_JavaScriptEnabled"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="setJavaScriptEnabled" />
+
+    <CheckBox
+        android:id="@+id/check_box_setJavaScriptCanOpenWindowsAutomatically"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="setJavaScriptCanOpenWindowsAutomatically" />
+
+    <CheckBox
+        android:id="@+id/check_box_setSupportMultipleWindows"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="setSupportMultipleWindows" />
+
+    <TextView
+        android:id="@+id/log"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/external"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:text="외부 브라우져" />
+
+        <RadioButton
+            android:id="@+id/another"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="다른 웹뷰" />
+
+        <RadioButton
+            android:id="@+id/in_webview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="내부" />
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
